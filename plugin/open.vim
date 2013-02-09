@@ -16,13 +16,3 @@ augroup PluginOpen
   " syntax highlight files, urls, and emails automatically
   autocmd! BufNew,BufRead,Syntax * call open#highlight_resources()
 augroup END
-
-" syntax: filepaths, URLs, emails
-syntax match OpenFilePath /\[[^\]]\+\]/
-hi def link OpenFilePath Label
-
-syntax match OpenURL @\<\(\w\+://\)\(\S*\w\)\+/\?@
-hi def link OpenUrl Label
-
-syntax match OpenMail /\%(\p\|\.\|_\|-\|+\)\+@\%(\p\+\.\)\p\+/
-hi def link OpenMail Label
