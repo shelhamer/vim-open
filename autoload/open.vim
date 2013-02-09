@@ -7,7 +7,7 @@
 function! open#open_at_cursor()
   let cword = expand('<cWORD>')
   " check for path (for further expansion)
-  if matchstr(getline('.'), '\[[^\]]\+]') != ''
+  if matchstr(getline('.'), '\[\[[^\]]\+]\]') != ''
     " capture text in delimiters around cursor
     let l = line('.')
     let c = col('.')
@@ -49,7 +49,8 @@ endfunction
 
 " syntax highlighting for files, urls, and emails
 function! open#highlight_resources()
-  syntax match noteFilePath /\[[^\]]\+\]/
+  syntax match noteFilePath @\%(^\|\s\+\)\zs\%(\~\|\.\{1,2}\)\?/\%(\S\+\)@
+  syntax match noteFilePath /\%(\[\[\)\@<=.\{-}\%(\]\]\)\@=/
   hi def link noteFilePath Label
 
   syntax match noteURL @\<\(\w\+://\)\(\S*\w\)\+/\?@

@@ -10,11 +10,10 @@ At the moment this is specific to OSX through the `open` shell command.
 The mapping `<leader>g` will open the resource at the cursor whether it is a
 file, url, or email.
 
-Filepaths are designated by enclosing them in square brackets []. This is the
-convention in markdown.
+Filepaths are designated by enclosing them in double square brackets, such as
+[[README.md]]. The brackets are optional for unix-style paths without spaces.
 
 ## TODO
 
 - doesn't support filepaths including square brackets
-- pick a better filepath delimiter for typing and detection?
 - add support for other OS (someday/maybe)
