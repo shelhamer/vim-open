@@ -6,16 +6,14 @@
 " Match known resource type at cursor and open
 function! open#open_at_cursor()
   let cword = expand('<cWORD>')
+  let line = getline('.')
   " check for path (for further expansion)
-  if matchstr(getline('.'), '\[\[[^\]]\+]\]') != ''
+  if matchstr(line, '\[\[.\{-}\]\]') != ''
     " capture text in delimiters around cursor
-    let l = line('.')
-    let c = col('.')
-    norm vi[y
-    let resource = expand(getreg('0'))
-    " undo side effects
-    call setreg('0','')
-    call cursor(l,c)
+    let idx = col('.') - 1
+    let idx_start = strridx(line[0:idx], '[[') + 2
+    let idx_end  = stridx(line[idx+1:-1], ']]') + idx
+    let resource = line[idx_start : idx_end]
   " urls/emails work as is
   else
     let resource = cword
@@ -33,11 +31,12 @@ function! open#open_resource(resource)
     call open#shell_open('mailto:' . a:resource)
   " path
   else
+    let shell_resource = expand(a:resource)
     " check exists/readable
-    if !(isdirectory(a:resource) || filereadable(a:resource))
-      echo "shell: " . a:resource . " couldn't be opened."
+    if !(isdirectory(shell_resource) || filereadable(shell_resource))
+      echo "shell: " . shell_resource . " couldn't be opened."
     else
-      call open#shell_open(a:resource)
+      call open#shell_open(shell_resource)
     endif
   endif
 endfunction
