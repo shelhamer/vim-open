@@ -14,5 +14,5 @@ map <silent> <leader>g :call open#open_at_cursor()<CR>
 
 augroup PluginOpen
   " syntax highlight files, urls, and emails automatically
-  autocmd! BufNew,BufRead,Syntax * call open#highlight_resources()
+  autocmd! BufNew,BufRead,Syntax *.md,*.txt call open#highlight_resources()
 augroup END
