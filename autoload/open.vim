@@ -27,7 +27,7 @@ function! open#open_resource(resource)
   if matchstr(a:resource, '\<\(\w\+://\)\(\S*\w\)\+/\?') != ''
     call open#shell_open(a:resource)
   " email
-  elseif matchstr(a:resource, '\%(\p\|\.\|_\|-\|+\)\+@\%(\p\+\.\)\p\+') != ''
+  elseif matchstr(a:resource, '\<\w[^@ \t\r]*\w@\w[^@ \t\r]\+\w\>') != ''
     call open#shell_open('mailto:' . a:resource)
   " path
   else
