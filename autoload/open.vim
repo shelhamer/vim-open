@@ -55,6 +55,6 @@ function! open#highlight_resources()
   syntax match noteURL @\<\(\w\+://\)\(\S*\w\)\+/\?@
   hi def link noteUrl Label
 
-  syntax match noteMail /\%(\p\|\.\|_\|-\|+\)\+@\%(\p\+\.\)\p\+/
+  syntax match noteMail /\<\w[^@ \t\r]*\w@\w[^@ \t\r]\+\w\>/
   hi def link noteMail Label
 endfunction
