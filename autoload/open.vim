@@ -52,6 +52,9 @@ function! open#highlight_resources()
   syntax match noteFilePath /\%(\[\[\)\@<=.\{-}\%(\]\]\)\@=/
   hi def link noteFilePath Label
 
+  syntax match citeKey /@\S\+/
+  hi def link citeKey Label
+
   syntax match noteURL @\<\(\w\+://\)\(\S*\w\)\+/\?@
   hi def link noteUrl Label
 
